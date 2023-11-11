@@ -1,5 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -9,3 +7,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  city String
+  state String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  books Book[]
+  sender Proposal[] @relation("sender_proposal")
+  receiver Proposal[] @relation("receiver_proposal")
+  @@map("users")
+}
+
+model Book {
+  id Int @id @default(autoincrement())
+  title String
+  author String
+  gender String[]
+  user User @relation(fields:[user_id], references:[id])
+  user_id Int
+  proposals Proposal[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("books")
+}
+
+model Proposal {
+  id Int @id @default(autoincrement())
+  sender User @relation("sender_proposal", fields:[sender_id], references:[id])
+  sender_id Int
+  receiver User @relation("receiver_proposal", fields:[receiver_id], references:[id])
+  receiver_id Int
+  book Book @relation(fields:[book_id], references:[id])
+  book_id Int
+  message String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("proposals") 
+} 
