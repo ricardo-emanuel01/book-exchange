@@ -3,6 +3,9 @@ const prisma = require('../prisma/client');
 
 const route = express();
 
+const authentication = require('../middleware/authentication');
+const putUser = require('./user/put-user');
+
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
     try {
@@ -13,5 +16,10 @@ route.get("/", async (req, res) => {
         res.status(500).json("erro interno do servidor")
     }
 })
+
+
+route.use(authentication);
+
+route.use(putUser);
 
 module.exports = route
