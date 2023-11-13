@@ -1,6 +1,6 @@
 const express = require('express');
 const prisma = require('../prisma/client');
-
+const signin = require('../controllers/user/signin/signin.js');
 const route = express();
 
 // rota de teste utilizando prisma
@@ -13,5 +13,6 @@ route.get("/", async (req, res) => {
         res.status(500).json("erro interno do servidor")
     }
 })
+route.post("/signin",signin)
 
 module.exports = route
