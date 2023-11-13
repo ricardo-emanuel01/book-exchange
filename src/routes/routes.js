@@ -1,5 +1,8 @@
 const express = require('express');
 const prisma = require('../prisma/client');
+const validateSchema = require('../middleware/validateSchema');
+const userSchema = require('../schema/userSchema');
+const signUp = require('../controllers/user/signup/signup');
 
 const route = express();
 
@@ -21,6 +24,8 @@ route.get("/", async (req, res) => {
 
 
 
+route.post('/signup', validateSchema(userSchema), signUp);
+
 route.use(authentication);
 
 route.put('/user', putUserController);
@@ -28,4 +33,8 @@ route.put('/user', putUserController);
 
 
 
-module.exports = route
+
+
+
+
+module.exports = route 
