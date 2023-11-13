@@ -1,11 +1,16 @@
 const express = require('express');
 const prisma = require('../prisma/client');
+const validateSchema = require('../middleware/validateSchema');
+const userSchema = require('../schema/userSchema');
+const signUp = require('../controllers/user/signup/signup');
 
 const route = express();
 
 const authentication = require('../middleware/authentication');
+
 const putUserController = require('../controllers/user/user-update');
 const getBooksController = require('../controllers/book/book-list');
+
 
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
@@ -18,10 +23,20 @@ route.get("/", async (req, res) => {
     }
 })
 
+route.post('/signup', validateSchema(userSchema), signUp);
 
 route.use(authentication);
 
 route.put('/user', putUserController);
 route.get('/books', getBooksController);
 
-module.exports = route
+
+
+
+
+
+
+
+
+
+module.exports = route 
