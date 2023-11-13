@@ -19,7 +19,7 @@ route.get("/", async (req, res) => {
 })
 
 
-//route.use(authentication);
+route.use(authentication);
 
 route.put('/user', putUserController);
 route.get('/books', getBooksController);
