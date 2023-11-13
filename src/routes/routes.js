@@ -1,5 +1,6 @@
 const express = require('express');
 const prisma = require('../prisma/client');
+const signin = require('../controllers/user/signin/signin.js');
 const validateSchema = require('../middleware/validateSchema');
 const userSchema = require('../schema/userSchema');
 const signUp = require('../controllers/user/signup/signup');
@@ -22,6 +23,7 @@ route.get("/", async (req, res) => {
         res.status(500).json("erro interno do servidor")
     }
 })
+route.post("/signin",signin)
 
 route.post('/signup', validateSchema(userSchema), signUp);
 
