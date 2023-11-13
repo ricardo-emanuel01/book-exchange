@@ -9,7 +9,7 @@ const signUp = async (req, res) => {
     try {
         const passwordHash = await bcrypt.hash(req.body.password, 10);
 
-        const newUser = await prisma.user.create({
+        const newUser = {
             data: {
                 name: req.body.name,
                 email: req.body.email,
@@ -17,9 +17,11 @@ const signUp = async (req, res) => {
                 city: req.body.city,
                 state: req.body.state,
             },
-        });
+        };
 
-        return res.status(201).json({ newUser });
+        await prisma.user.create(newUser);
+
+        return res.status(201).json({ message: 'O usuário foi cadastrado com sucesso!' });
     } catch (error) {
         console.log(error);
 
@@ -30,5 +32,6 @@ const signUp = async (req, res) => {
 };
 
 module.exports = signUp;
+
 
 
