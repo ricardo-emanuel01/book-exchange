@@ -1,7 +1,10 @@
 const express = require('express');
 const prisma = require('../prisma/client');
+
 const validateSchema = require('../middleware/validateSchema');
 const userSchema = require('../schema/userSchema');
+const bookSchema = require('../schema/bookSchema');
+
 const signUp = require('../controllers/user/signup/signup');
 
 const route = express();
