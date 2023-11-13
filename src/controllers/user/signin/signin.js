@@ -12,7 +12,7 @@ async function signin(req,res){
 
     if (user && await bcrypt.compare(password, user.password)) {
         // create jwt with user information
-        const token = jwt.sign({ userId: user.id, email: user.email },process.env.SECRET_KEY, { expiresIn:  60 * 60 * 1000 }); //expires in 1 hour
+        const token = jwt.sign({ userId: user.id, email: user.email },process.env.JWT_KEY, { expiresIn:  60 * 60 * 1000 }); //expires in 1 hour
 
         res.status(200).json({ 
             "id": user.id ,
