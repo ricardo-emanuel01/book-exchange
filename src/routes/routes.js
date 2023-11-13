@@ -4,7 +4,8 @@ const prisma = require('../prisma/client');
 const route = express();
 
 const authentication = require('../middleware/authentication');
-const putUser = require('./user/put-user');
+const putUserController = require('../controllers/user/user-update');
+const getBooksController = require('../controllers/book/book-list');
 
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
@@ -18,8 +19,9 @@ route.get("/", async (req, res) => {
 })
 
 
-route.use(authentication);
+//route.use(authentication);
 
-route.use(putUser);
+route.put('/user', putUserController);
+route.get('/books', getBooksController);
 
 module.exports = route
