@@ -15,7 +15,6 @@ async function signin(req,res){
         const token = jwt.sign({ userId: user.id, email: user.email },process.env.SECRET_KEY, { expiresIn:  60 * 60 * 1000 }); //expires in 1 hour
 
         res.status(200).json({ 
-            "message":"succesfully",
             "id": user.id ,
             "email": user.email ,
             "username": user.username ,
