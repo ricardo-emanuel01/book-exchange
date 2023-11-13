@@ -5,6 +5,7 @@ const route = express();
 
 const authentication = require('../middleware/authentication');
 const putUser = require('./user/put-user');
+const getBooks = require('./book/get-books');
 
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
@@ -21,5 +22,5 @@ route.get("/", async (req, res) => {
 route.use(authentication);
 
 route.use(putUser);
-
+route.use(getBooks)
 module.exports = route
