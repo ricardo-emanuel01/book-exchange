@@ -6,6 +6,10 @@ const signUp = require('../controllers/user/signup/signup');
 
 const route = express();
 
+const authentication = require('../middleware/authentication');
+
+const putUserController = require('../controllers/user/user-update');
+
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
     try {
@@ -17,6 +21,20 @@ route.get("/", async (req, res) => {
     }
 })
 
+
+
+
 route.post('/signup', validateSchema(userSchema), signUp);
+
+route.use(authentication);
+
+route.put('/user', putUserController);
+
+
+
+
+
+
+
 
 module.exports = route 
