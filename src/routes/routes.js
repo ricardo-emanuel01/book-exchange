@@ -9,6 +9,8 @@ const route = express();
 const authentication = require('../middleware/authentication');
 
 const putUserController = require('../controllers/user/user-update');
+const getBooksController = require('../controllers/book/book-list');
+
 
 // rota de teste utilizando prisma
 route.get("/", async (req, res) => {
@@ -21,14 +23,14 @@ route.get("/", async (req, res) => {
     }
 })
 
-
-
-
 route.post('/signup', validateSchema(userSchema), signUp);
 
 route.use(authentication);
 
 route.put('/user', putUserController);
+route.get('/books', getBooksController);
+
+
 
 
 
