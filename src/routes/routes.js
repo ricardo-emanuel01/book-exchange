@@ -13,7 +13,7 @@ const authentication = require('../middleware/authentication');
 
 const getUser = require('../controllers/user/getUser');
 const deleteUser = require('../controllers/user/deleteUser');
-const putUserController = require('../controllers/user/userUpdate.js');
+const putUserController = require('../controllers/user/putUser.js');
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
 const getBooksController = require('../controllers/book/bookList.js');
