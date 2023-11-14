@@ -11,6 +11,7 @@ const signin = require('../controllers/user/signin/signin.js');
 const authentication = require('../middleware/authentication');
 
 const getUser = require('../controllers/user/getUser');
+const deleteUser = require('../controllers/user/deleteUser');
 const putUserController = require('../controllers/user/user-update');
 const postBook = require('../controllers/book/postBook');
 const getBooksController = require('../controllers/book/book-list');
@@ -34,6 +35,7 @@ route.post("/signin", signin)
 route.use(authentication);
 
 route.get('/user', getUser);
+route.delete('/user', deleteUser);
 route.put('/user', putUserController);
 route.post('/book', validateSchema(bookSchema), postBook);
 route.get('/books', getBooksController);
