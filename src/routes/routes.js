@@ -33,17 +33,21 @@ route.get("/", async (req, res) => {
     }
 })
 route.post('/signup', validateSchema(userSchema), signUp);
-route.post("/signin", signin)
+route.post("/signin", signin);
+
+route.get('/books', getBooksController);
 
 route.use(authentication);
 
 route.get('/user', getUser);
 route.delete('/user', deleteUser);
 route.put('/user', putUserController);
+
 route.post('/book', validateSchema(bookSchema), postBook);
 route.get('/book/:id', getBook);
 route.put('/book/:id', validateSchema(putBookSchema), putBook);
-route.get('/books', getBooksController);
+
+
 
 
 
