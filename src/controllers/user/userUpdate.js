@@ -10,7 +10,7 @@ const userUpdate = async (req, res) => {
         });
 
         if (!user) {
-            return res.status(404).json({ message: "User not found!" });
+            return res.status(404).json({ message: "Usuário não encontrado." });
         }
   
         if(email){
@@ -20,7 +20,7 @@ const userUpdate = async (req, res) => {
       
             if (emailExists && emailExists.id != id) {
                 return res.status(400).json({
-                    message: "There is already a user register with the email provided.",
+                    message: "Já existe um usuário cadastrado com o email informado.",
                 });
             }
         }
