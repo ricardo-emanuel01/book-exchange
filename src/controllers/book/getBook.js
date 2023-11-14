@@ -1,7 +1,5 @@
 
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+const prisma = require('../../prisma/client');
 
 const getBook = async (req, res) => {
     try {

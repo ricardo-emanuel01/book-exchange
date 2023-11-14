@@ -1,6 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+const prisma = require('../../prisma/client');
 
 const postBook = async (req, res) => {
     try {
@@ -21,9 +19,9 @@ const postBook = async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        if (error.message === 'Token inválido') return res.status(401).json({ error: 'Token inválido' });
+        if (error.message === 'Token inválido') return res.status(401).json({ message: 'Token inválido' });
 
-        return res.status(500).json({ error: 'Erro interno do servidor' });
+        return res.status(500).json({ message: 'Erro interno do servidor' });
     }
 };
 
