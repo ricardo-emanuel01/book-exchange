@@ -4,6 +4,7 @@ const prisma = require('../prisma/client');
 const validateSchema = require('../middleware/validateSchema');
 const userSchema = require('../schema/userSchema');
 const bookSchema = require('../schema/bookSchema');
+const putBookSchema = require('../schema/putBookSchema');
 
 const signUp = require('../controllers/user/signup/signup');
 const signin = require('../controllers/user/signin/signin.js');
@@ -16,6 +17,7 @@ const putUserController = require('../controllers/user/user-update');
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
 const getBooksController = require('../controllers/book/book-list');
+const putBook = require('../controllers/book/putBook');
 
 const route = express();
 
@@ -40,6 +42,7 @@ route.delete('/user', deleteUser);
 route.put('/user', putUserController);
 route.post('/book', validateSchema(bookSchema), postBook);
 route.get('/book/:id', getBook);
+route.put('/book/:id', validateSchema(putBookSchema), putBook);
 route.get('/books', getBooksController);
 
 
