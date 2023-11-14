@@ -1,16 +1,19 @@
 const express = require('express');
 const prisma = require('../prisma/client');
-const signin = require('../controllers/user/signin/signin.js');
+
 const validateSchema = require('../middleware/validateSchema');
 const userSchema = require('../schema/userSchema');
-const signUp = require('../controllers/user/signup/signup');
+const bookSchema = require('../schema/bookSchema');
 
-const route = express();
+const signUp = require('../controllers/user/signup/signup');
+const signin = require('../controllers/user/signin/signin.js');
 
 const authentication = require('../middleware/authentication');
 
 const putUserController = require('../controllers/user/user-update');
 const getBooksController = require('../controllers/book/book-list');
+
+const route = express();
 
 
 // rota de teste utilizando prisma
