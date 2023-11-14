@@ -35,35 +35,9 @@ const bookList = async (req, res) =>{
             }
         }
 
-        const result = await prisma.book.findMany(parameters);
-        const users = {};
+        const books = await prisma.book.findMany(parameters);
 
-        result.forEach(row => {
-            const userId = row.user.id;
-
-            if (!users[userId]) {
-                users[userId] = {
-                    id: row.user.id,
-                    name: row.user.name,
-                    books: []
-                }
-            }
-            users[userId].books.push({
-                id: row.id,
-                title: row.title,
-                author: row.author,
-                gender: row.gender
-            });
-
-        });
-
-        const usersReturn = [];
-
-        for (const userId in users) {
-            usersReturn.push(users[userId]);
-        }
-
-        res.status(200).json({users: usersReturn});
+        res.status(200).json(books);
 
     } catch (error) {
         res.status(500).json({message: error.message});
