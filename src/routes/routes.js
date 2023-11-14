@@ -14,6 +14,7 @@ const getUser = require('../controllers/user/getUser');
 const deleteUser = require('../controllers/user/deleteUser');
 const putUserController = require('../controllers/user/user-update');
 const postBook = require('../controllers/book/postBook');
+const getBook = require('../controllers/book/getBook');
 const getBooksController = require('../controllers/book/book-list');
 
 const route = express();
@@ -38,6 +39,7 @@ route.get('/user', getUser);
 route.delete('/user', deleteUser);
 route.put('/user', putUserController);
 route.post('/book', validateSchema(bookSchema), postBook);
+route.get('/book/:id', getBook);
 route.get('/books', getBooksController);
 
 
