@@ -11,6 +11,7 @@ const signin = require('../controllers/user/signin/signin.js');
 const authentication = require('../middleware/authentication');
 
 const putUserController = require('../controllers/user/user-update');
+const postBook = require('../controllers/book/postBook');
 const getBooksController = require('../controllers/book/book-list');
 
 const route = express();
@@ -26,13 +27,13 @@ route.get("/", async (req, res) => {
         res.status(500).json("erro interno do servidor")
     }
 })
-route.post("/signin",signin)
-
 route.post('/signup', validateSchema(userSchema), signUp);
+route.post("/signin", signin)
 
 route.use(authentication);
 
 route.put('/user', putUserController);
+route.post('/book', validateSchema(bookSchema), postBook);
 route.get('/books', getBooksController);
 
 
