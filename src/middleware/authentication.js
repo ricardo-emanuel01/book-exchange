@@ -9,22 +9,19 @@ const authentication = async (req, res, next) => {
             return res.status(401).json({ message: "Authentication token is required."});
         }
 
-        const { id } = jwt.verify(token, process.env.JWT_KEY);
-
-        const user = await prisma.user.findUnique({ where: id});
+        const { userId } = jwt.verify(token, process.env.JWT_KEY);
+        const user = await prisma.user.findUnique({ where: {id:userId}});
 
         if (!user) {
             return res.status(401).json({ message: "Authentication token is required."});
         }
 
         const { password:_, ...loggedUser } = user;
-
         req.user = loggedUser;
-
         next();
-
+        
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: "Authentication token is required." });
     }
 };
 

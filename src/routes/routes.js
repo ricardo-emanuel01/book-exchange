@@ -13,10 +13,10 @@ const authentication = require('../middleware/authentication');
 
 const getUser = require('../controllers/user/getUser');
 const deleteUser = require('../controllers/user/deleteUser');
-const putUserController = require('../controllers/user/user-update');
+const putUserController = require('../controllers/user/userUpdate.js');
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
-const getBooksController = require('../controllers/book/book-list');
+const getBooksController = require('../controllers/book/bookList.js');
 const putBook = require('../controllers/book/putBook');
 
 const route = express();

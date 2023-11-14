@@ -1,7 +1,6 @@
 const prisma = require('../../prisma/client');
 
 const bookList = async (req, res) =>{
-
     let {user_id} = req.query;
 
     try {
@@ -37,7 +36,6 @@ const bookList = async (req, res) =>{
         }
 
         const result = await prisma.book.findMany(parameters);
-
         const users = {};
 
         result.forEach(row => {
@@ -70,7 +68,6 @@ const bookList = async (req, res) =>{
     } catch (error) {
         res.status(500).json({message: error.message});
     }
-
 }
 
 module.exports = bookList;
