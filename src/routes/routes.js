@@ -21,21 +21,8 @@ const putBook = require('../controllers/book/putBook');
 
 const route = express();
 
-
-// rota de teste utilizando prisma
-route.get("/", async (req, res) => {
-    try {
-        //trocar proposal por book ou user para testar
-        const users = await prisma.proposal.findMany()
-        res.status(200).json(users)
-    } catch (error) {
-        res.status(500).json("erro interno do servidor")
-    }
-})
 route.post('/signup', validateSchema(userSchema), signUp);
 route.post("/signin", signin);
-
-route.get('/books', getBooksController);
 
 route.use(authentication);
 
@@ -43,6 +30,7 @@ route.get('/user', getUser);
 route.delete('/user', deleteUser);
 route.put('/user', putUserController);
 
+route.get('/books', getBooksController);
 route.post('/book', validateSchema(bookSchema), postBook);
 route.get('/book/:id', getBook);
 route.put('/book/:id', validateSchema(putBookSchema), putBook);

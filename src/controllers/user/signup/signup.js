@@ -1,34 +1,33 @@
-
 const prisma = require('../../../prisma/client');
 const bcrypt = require('bcrypt');
 
 const signUp = async (req, res) => {
-    try {
-        const passwordHash = await bcrypt.hash(req.body.password, 10);
+  const { name, email, phone, password, city, state } = req.body;
 
-        const newUser = {
-            data: {
-                name: req.body.name,
-                email: req.body.email,
-                password: passwordHash,
-                city: req.body.city,
-                state: req.body.state,
-            },
-        };
+  try {
+    const passwordHash = await bcrypt.hash(password, 10);
 
-        await prisma.user.create(newUser);
+    const newUser = {
+      data: {
+        name,
+        email,
+        phone,
+        password: passwordHash,
+        city,
+        state
+      },
+    };
 
-        return res.status(201).json({ message: 'O usuário foi cadastrado com sucesso!' });
-    } catch (error) {
-        console.log(error);
+    await prisma.user.create(newUser);
 
-        if (error.code === 'P2002') return res.status(400).json({ message: 'O email já está em uso.' });
-
-        return res.status(500).json({ message: 'Erro interno do servidor.' });
+    return res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+  } catch (error) {
+    if (error.code === 'P2002') {
+      return res.status(400).json({ message: 'O email informado já está em uso.' });
     }
+
+    return res.status(500).json({ message: 'Erro interno do servidor.' });
+  }
 };
 
 module.exports = signUp;
-
-
-
