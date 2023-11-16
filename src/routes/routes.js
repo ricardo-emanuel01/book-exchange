@@ -1,19 +1,20 @@
 const express = require('express');
-const prisma = require('../prisma/client');
 
+const authentication = require('../middleware/authentication');
 const validateSchema = require('../middleware/validateSchema');
-const userSchema = require('../schema/userSchema');
+
+const signUpSchema = require('../schema/signUpSchema.js');
+const signInSchema = require('../schema/signInSchema.js');
 const bookSchema = require('../schema/bookSchema');
 const putBookSchema = require('../schema/putBookSchema');
 
 const signUp = require('../controllers/user/signup/signup');
-const signin = require('../controllers/user/signin/signin.js');
-
-const authentication = require('../middleware/authentication');
+const signIn = require('../controllers/user/signin/signin.js');
 
 const getUser = require('../controllers/user/getUser');
 const deleteUser = require('../controllers/user/deleteUser');
 const putUserController = require('../controllers/user/putUser.js');
+
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
 const getBooksController = require('../controllers/book/bookList.js');
@@ -21,8 +22,8 @@ const putBook = require('../controllers/book/putBook');
 
 const route = express();
 
-route.post('/signup', validateSchema(userSchema), signUp);
-route.post("/signin", signin);
+route.post('/signup', validateSchema(signUpSchema), signUp); //ok
+route.post("/signin", validateSchema(signInSchema), signIn); //ok
 
 route.use(authentication);
 

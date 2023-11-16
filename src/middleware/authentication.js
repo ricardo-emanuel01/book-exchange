@@ -2,27 +2,31 @@ const jwt = require("jsonwebtoken");
 const prisma = require('../prisma/client');
 
 const authentication = async (req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
+  const { authorization } = req.headers;
 
-        if(!token){
-            return res.status(401).json({ message: "Um token de autenticação é requerido para acessar essa funcionalidade"});
-        }
+  if (!authorization) {
+    return res.status(401).json({ message: "Não autorizado" });
+  }
 
-        const { userId } = jwt.verify(token, process.env.JWT_KEY);
-        const user = await prisma.user.findUnique({ where: {id:userId}});
+  const token = authorization.split(" ")[1];
 
-        if (!user) {
-            return res.status(401).json({ message: "Um token de autenticação é requerido para acessar essa funcionalidade"});
-        }
+  try {
+    const { id } = jwt.verify(token, process.env.JWT_KEY);
 
-        const { password:_, ...loggedUser } = user;
-        req.user = loggedUser;
-        next();
-        
-    } catch (error) {
-        return res.status(500).json({ message: "Um token de autenticação é requerido para acessar essa funcionalidade" });
+    const user = await prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      return res.status(401).json({ message: "Não autorizado" });
     }
+
+    const { password: _, ...loggedUser } = user;
+
+    req.user = loggedUser;
+
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Não autorizado" });
+  }
 };
 
 module.exports = authentication;

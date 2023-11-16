@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const userSchema = joi.object({
+const signUpSchema = joi.object({
   name: joi.string().required().trim().messages({
     "any.required": "O campo name é obrigatório.",
     "string.empty": "O campo name é obrigatório.",
@@ -41,5 +41,5 @@ const userSchema = joi.object({
   }),
 });
 
-module.exports = userSchema;
+module.exports = signUpSchema;
 

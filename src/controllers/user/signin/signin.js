@@ -1,36 +1,37 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const prisma = require('../../../prisma/client');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
-require('dotenv').config();
+async function signIn(req, res) {
+  const { email, password } = req.body;
 
-async function signin(req,res){
   try {
-    const { email, password } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });
 
+    if (!user) {
+      return res.status(400).json({ "message": "E-mail ou senha inválida" });
+    }
 
-    if (user && await bcrypt.compare(password, user.password)) {
-        // create jwt with user information
-        const token = jwt.sign({ userId: user.id, email: user.email },process.env.JWT_KEY, { expiresIn:  60 * 60 * 1000 }); //expires in 1 hour
+    const validPassword = await bcrypt.compare(password, user.password);
 
-        res.status(200).json({ 
-            "id": user.id ,
-            "email": user.email ,
-            "username": user.username ,
-            "token": token
-         });
-  }else{
-        res.status(400).json({
-            "message":"invalid email or password"
-        })
+    if (!validPassword) {
+      return res.status(400).json({ "message": "E-mail ou senha inválida" });
+    }
+
+    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_KEY, { expiresIn: "8h" });
+
+    res.status(200).json({
+      user: {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "username": user.username,
+      },
+      "token": token
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno do servidor' });
   }
- } catch(error) {
-    console.error(error);
-    res.status(500).json({ message: 'internal server error' });
-  }
-
 }
 
-
-module.exports = signin;
+module.exports = signIn;
