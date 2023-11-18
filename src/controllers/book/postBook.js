@@ -18,11 +18,6 @@ const postBook = async (req, res) => {
 
     return res.status(201).json({ message: `Livro cadastrado com sucesso!` });
   } catch (error) {
-    // Essa parte do código não chega a ser utilizada devido ao intermediário que valida tokens
-    if (error.message === 'Token inválido') {
-      return res.status(401).json({ message: 'Não autorizado.' });
-    }
-
     if (error.code === 'P2003') {
       return res.status(401).json({ message: 'Não autorizado.' });
     }
