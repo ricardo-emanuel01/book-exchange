@@ -5,7 +5,7 @@ const validateSchema = require('../middleware/validateSchema');
 
 const signUpSchema = require('../schema/signUpSchema.js');
 const signInSchema = require('../schema/signInSchema.js');
-const bookSchema = require('../schema/bookSchema');
+const postBookSchema = require('../schema/postBookSchema.js');
 const putBookSchema = require('../schema/putBookSchema');
 const putUserSchema = require('../schema/putUserSchema.js');
 
@@ -18,8 +18,8 @@ const putUser = require('../controllers/user/putUser.js');
 
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
-const getBooksController = require('../controllers/book/bookList.js');
 const putBook = require('../controllers/book/putBook');
+const getBooks = require('../controllers/book/getBooks.js');
 
 const route = express();
 
@@ -29,13 +29,13 @@ route.post("/signin", validateSchema(signInSchema), signIn); //ok
 route.use(authentication); // ok
 
 route.get('/user', getUser); // ok
-route.delete('/user', deleteUser); // ok percial, testar com livros cadastrados
+route.delete('/user', deleteUser); // ok // msg Token inválido
 route.put('/user', validateSchema(putUserSchema), putUser); // ok
 
-route.get('/books', getBooksController);
-route.post('/book', validateSchema(bookSchema), postBook);
-route.get('/book/:id', getBook);
-route.put('/book/:id', validateSchema(putBookSchema), putBook);
+route.get('/book', getBooks); // ok
+route.post('/book', validateSchema(postBookSchema), postBook); // ok // msg Token inválido
+route.get('/book/:id', getBook); // ok // msg Token inválido
+route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok // msg Token inválido
 
 
 

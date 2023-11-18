@@ -1,4 +1,3 @@
-
 const prisma = require('../../prisma/client');
 
 const deleteUser = async (req, res) => {
@@ -20,8 +19,7 @@ const deleteUser = async (req, res) => {
 
     return res.status(204).send();
   } catch (error) {
-    console.error(error);
-
+    // Essa parte do código não chega a ser utilizada devido ao intermediário que valida tokens
     if (error.message === 'Token inválido') {
       return res.status(401).json({ error: 'Não autorizado.' });
     }
