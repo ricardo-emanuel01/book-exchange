@@ -7,6 +7,7 @@ const signUpSchema = require('../schema/signUpSchema.js');
 const signInSchema = require('../schema/signInSchema.js');
 const bookSchema = require('../schema/bookSchema');
 const putBookSchema = require('../schema/putBookSchema');
+const putUserSchema = require('../schema/putUserSchema.js');
 
 const signUp = require('../controllers/user/signup/signup');
 const signIn = require('../controllers/user/signin/signin.js');
@@ -29,7 +30,7 @@ route.use(authentication); // ok
 
 route.get('/user', getUser); // ok
 route.delete('/user', deleteUser); // ok percial, testar com livros cadastrados
-route.put('/user', putUser); // fazer esquema
+route.put('/user', validateSchema(putUserSchema), putUser); // ok
 
 route.get('/books', getBooksController);
 route.post('/book', validateSchema(bookSchema), postBook);
