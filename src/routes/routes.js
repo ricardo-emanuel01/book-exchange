@@ -29,7 +29,7 @@ route.post("/signin", validateSchema(signInSchema), signIn); //ok
 route.use(authentication); // ok
 
 route.get('/user', getUser); // ok
-route.delete('/user', deleteUser); // ok // msg Token inválido
+route.delete('/user', deleteUser); // ok
 route.put('/user', validateSchema(putUserSchema), putUser); // ok
 
 route.get('/book', getBooks); // ok
