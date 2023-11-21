@@ -33,8 +33,8 @@ route.delete('/user', deleteUser); // ok // msg Token inválido
 route.put('/user', validateSchema(putUserSchema), putUser); // ok
 
 route.get('/book', getBooks); // ok
-route.post('/book', validateSchema(postBookSchema), postBook); // ok // msg Token inválido
-route.get('/book/:id', getBook); // ok // msg Token inválido
+route.post('/book', validateSchema(postBookSchema), postBook); // ok
+route.get('/book/:id', getBook); // ok 
 route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok // msg Token inválido
 
 
