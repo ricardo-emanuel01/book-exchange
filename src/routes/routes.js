@@ -19,6 +19,7 @@ const putUser = require('../controllers/user/putUser.js');
 const postBook = require('../controllers/book/postBook');
 const getBook = require('../controllers/book/getBook');
 const putBook = require('../controllers/book/putBook');
+const deleteBook = require('../controllers/book/deleteBook');
 const getBooks = require('../controllers/book/getBooks.js');
 
 const route = express();
@@ -36,7 +37,7 @@ route.get('/book', getBooks); // ok
 route.post('/book', validateSchema(postBookSchema), postBook); // ok
 route.get('/book/:id', getBook); // ok 
 route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok // msg Token inválido
-
+route.delete('/book/:id', deleteBook);
 
 
 
