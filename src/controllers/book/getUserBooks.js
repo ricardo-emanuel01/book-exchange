@@ -1,13 +1,4 @@
 
-
-// GET /userbooks
-// permite ao usuário logado ver todos os seus livros
-// requisição: TOKEN NO HEADER (ID)
-// devolve: todos os livros do usuário com: id, título, autor, gênero
-// erro: 401, 500
-
-
-
 const prisma = require('../../prisma/client');
 
 const getUserBooks = async (req, res) => {
