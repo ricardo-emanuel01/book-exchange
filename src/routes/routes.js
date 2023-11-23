@@ -21,6 +21,7 @@ const getBook = require('../controllers/book/getBook');
 const putBook = require('../controllers/book/putBook');
 const deleteBook = require('../controllers/book/deleteBook');
 const getBooks = require('../controllers/book/getBooks.js');
+const getUserBooks = require('../controllers/book/getUserBooks.js');
 
 const route = express();
 
@@ -34,6 +35,7 @@ route.delete('/user', deleteUser); // ok
 route.put('/user', validateSchema(putUserSchema), putUser); // ok
 
 route.get('/book', getBooks); // ok
+route.get('/userbooks', getUserBooks); // ok
 route.post('/book', validateSchema(postBookSchema), postBook); // ok
 route.get('/book/:id', getBook); // ok 
 route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok // msg Token inválido
