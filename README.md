@@ -1,12 +1,18 @@
 # Book-Exchange
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+![javascript](https://img.shields.io/badge/Javascript-8A2BE2?style=flat-square&logo=javascript&logoColor=white)
+![nodejs](https://img.shields.io/badge/NodeJS-grey?style=flat-square&logo=nodedotjs&logoColor=white)
+![postgresql](https://img.shields.io/badge/JPostgreSQL-8A2BE2?style=flat-square&logo=PostgreSQL&logoColor=white)
+![prisma](https://img.shields.io/badge/Prisma-grey?style=flat-square&logo=Prisma&logoColor=white)
+![express](https://img.shields.io/badge/Express-8A2BE2?style=flat-square&logo=Express&logoColor=white)
+![dotenv](https://img.shields.io/badge/Dotenv-grey?style=flat-square&logo=dotenv&logoColor=white)
+![nodemon](https://img.shields.io/badge/Nodemon-8A2BE2?style=flat-square&logo=Nodemon&logoColor=white)
+![joi](https://img.shields.io/badge/Joi-grey?style=flat-square)
+![bcrypt](https://img.shields.io/badge/Bcrypt-8A2BE2?style=flat-square)
+![jwt](https://img.shields.io/badge/JWT-grey?style=flat-square)
+![cors](https://img.shields.io/badge/Cors-8A2BE2?style=flat-square)
+![helmet](https://img.shields.io/badge/Helmet-grey?style=flat-square)
 
-<img src="imagem.png" alt="Exemplo imagem">
 
 > Desenvolvemos uma API para uma aplicação web focada na troca de livros entre os usuários.
 
@@ -420,14 +426,14 @@ Sem corpo de requisição, apenas o token no headers.
 }
 ```
 
-## 📫 Contribuindo para <nome_do_projeto>
+## 📫 Contribuindo para o Book-exchange
 
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+Para contribuir com o Book-exchange, siga estas etapas:
 
 1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+2. Crie um branch: `git checkout -b <nome_branch>`
+3. Faça suas alterações e confirme-as: `git commit -m <mensagem_commit>`
+4. Envie para o branch original: `git push origin main`
 5. Crie a solicitação de pull.
 
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
@@ -441,7 +447,7 @@ Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contr
 
 <img src="./img/agradecimentos.png" alt="agradecimentos" width=400 border="0" /> </div>
 
-Agradecemos a nossa professora Isabella Nunes; nossa representante de turma Jules; o monitor Lucas Oliveira; os professores Guido Cerqueira, José Messias Junior e Guilherme Bernal; ao Potência Tech, iniciativa do iFood que nos conectou; e também a todos da Cubos Academy.
+Se você chegou até aqui agradecemosAgradecemos nosso colega Ricardo Oliveira por ter feito parte da ideação inicial do projeto e ter nos auxiliado com conceitos importantes para o projeto.  
 
 ## 🤝 Colaboradores
 <table>
