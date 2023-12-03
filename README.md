@@ -106,7 +106,37 @@ Essa rota lista todos os livros dos usuários da plataforma sem a necessidade de
 ```
 
 
-2. POST /login
+2. POST /signup
+
+Essa rota cadastra novos usuáros.
+
+### Exemplo de requisição
+
+```json
+{
+	"name": "Paula", 
+	"email": "paula@gmail.com", 
+	"phone": "12345678912", 
+	"password": "123456",
+	"passwordConfirmation": "123456",
+	"city": "rio", 
+	"state": "rj"
+}
+```
+
+### Exemplo de resposta
+
+```json
+{
+	"message": "Usuário cadastrado com sucesso!"
+}
+```
+```json
+{
+	"mensagem": "O campo email precisa ser um email válido."
+}
+```
+3. POST /signin
 
 Essa rota é para login de usuários cadastrados.
 
@@ -114,8 +144,8 @@ Essa rota é para login de usuários cadastrados.
 
 ```json
 {
-    "email": "lucas@email.com",
-    "password": "123"
+	"email": "paula@gmail.com",	 
+	"password": "123456"	
 }
 ```
 
@@ -123,27 +153,52 @@ Essa rota é para login de usuários cadastrados.
 
 ```json
 {
-    "E-mail ou senha incorreta!"
+	"user": {
+		"id": 1,
+		"name": "Paula",
+		"email": "paula@gmail.com"
+	},
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwYXVsYUBnbWFpbC5jb20iLCJpYXQiOjE3MDE2MjI5MTEsImV4cCI6MTcwMTY1MTcxMX0.GTq6vk_5gBco69aqgKXDVn0FuMKC57fc2WCaq5y7-ME"
 }
 ```
 ```json
 {
-    "usuario": {
-        "id": 1,
-        "name": "Lucas",
-        "email": "lucas@email.com",
-        "authorized": true
-    },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg5MDE5ODAyLCJleHAiOjE2ODkwNDg2MDJ9.Jpd0o2K7-02l-midG6VfWNIgPV6uslQnxc2AH3eO6VA"
+	"message": "E-mail ou senha inválida"
 }
 ```
 ---
 ## ATENÇÃO: Todos os endpoints a seguir exigem token de autenticação gerado ao logar um usuário. O token dever ser colocado no headers da requisição e deve ter o formato Bearer Token. O usuário logado precisa ter a propriedade ```authorized``` com valor ```true``` para manipular todos os dados de influenciadores, caso contrário só conseguirá ver a lista de influenciadores cadastrados. Essa propriedade é definida no cadastro do usuário.
 ---
 
-3. GET /profile
+4. PATCH /password
 
-Essa rota é para obter os dados do usuário logado.
+Essa rota altera a senha do usuário logado.
+
+### Exemplo de requisição
+
+```json
+{
+	"oldPassword": "123456", 
+	"password": "1234567", 
+	"passwordConfirmation": "1234567"	
+}
+```
+
+### Exemplo de resposta
+
+```json
+{
+	"message": "Senha antiga inválida."
+}
+```
+```json
+{
+	"message": "Senha atualizada."
+}
+```
+5. GET /user 
+
+Essa rota lista dados do usuário logado.
 
 ### Exemplo de requisição
 
@@ -153,77 +208,31 @@ Sem corpo de requisição, apenas o token no headers.
 
 ```json
 {
-    "Usuário não autorizado!"
+	"id": 1,
+	"name": "Paula",
+	"email": "paula@gmail.com",
+	"phone": "12345678912",
+	"city": "rio",
+	"state": "rj"
 }
 ```
 ```json
 {
-    "id": 1,
-    "name": "Lucas",
-    "email": "lucas@email.com",
-    "authorized": true
+	"message": "Não autorizado"
 }
 ```
-4. GET /categories 
 
-Essa rota é para listar as categorias de conteúdo.
+6. POST /book 
 
-### Exemplo de requisição
-
-Sem corpo de requisição, apenas o token no headers.
-
-### Exemplo de resposta
-
-```json
-{
-    "Usuário não autorizado!"
-}
-```
-```json
-[
-    {
-        "id": 1,
-        "category": "Vlog"
-    },
-    {
-        "id": 2,
-        "category": "Review"
-    },
-    {
-        "id": 3,
-        "category": "Moda e Estilo"
-    },
-    {
-        "id": 4,
-        "category": "Beleza"
-    }
-]
-```
-
-5. POST /influencers 
-
-Essa rota é para cadastrar influenciadores
+Essa rota é para cadastrar novos livros.
 
 ### Exemplos de requisição
 
 ```json
 {
-    "name": "Pato Papão",
-    "email":"patopa@email.com",
-    "age": 31,
-    "subscribers": 1200000,
-    "at_channel": "paptopapao_oficial2",
-    "platform": "YouTube",
-    "id_category": 13
-}
-```
-```json
-{
-    "name": "Peter L",
-    "subscribers": 1200000,
-    "at_channel": "@nerdchannel",
-    "platform": "YouTube",
-    "id_category": 10
+	"title": "O estrangeiro", 
+	"author": "Albert Camus", 
+	"gender":	["filosofia", "ficção"]
 }
 ```
 
@@ -231,32 +240,40 @@ Essa rota é para cadastrar influenciadores
 
 ```json
 {
-    "Este e-mail já foi cadastrado."
+	"message": "Livro cadastrado com sucesso!"
 }
 ```
 ```json
 {
-    "O @ do canal já possui registro."
+	"mensagem": "O campo gender deve ser uma lista com no mínimo 1 item"
 }
 ```
+
+
+7. PUT /user
+
+Essa Rota altera dados do usuário logado (o usuário pode escolher alterar um ou mais dados).
+
+### Exemplo de requisição
+
 ```json
 {
-    "id": 5,
-    "name": "Pato Papão",
-    "email": "patopa@email.com",
-    "age": 31,
-    "subscribers": 1200000,
-    "at_channel": "paptopapao_oficial2",
-    "platform": "YouTube",
-    "id_user": 1,
-    "id_category": 13,
-    "category": "Games"
+	"name": "Paula RML"
 }
 ```
 
-6. GET /influencers
+### Exemplo de resposta
 
-Essa Rota é para listar todos os influenciadores cadastrados
+```json
+{
+	"message": "Usuário atualizado."
+}
+```
+
+
+7. GET /book/:id
+
+Essa Rota é para encontrar um livro pelo número do id. O ```id``` do livro que se quer encontrar deve ser passado como parâmetro de rota ```req.params```.
 
 ### Exemplo de requisição
 
@@ -266,153 +283,140 @@ Sem corpo de requisição, apenas o token no headers.
 
 ```json
 {
-    "Usuário não autorizado!"
+	"id": 2,
+	"title": "Quarto de despejo",
+	"author": "Carolina Maria de Jesus",
+	"available": true,
+	"gender": [
+		"biografia",
+		"autobiografia"
+	],
+	"user": {
+		"id": 1,
+		"name": "Paula RML"
+	}
 }
 ```
+
+
+8. PUT /book/:id 
+
+Essa rota é para atualizar os dados de um livro específico. O ```id``` do livro que se quer atualizar deve ser passado como parâmetro de rota ```req.params```. O usuário pode escolher alterar um ou mais dados.
+
+### Exemplos de requisição
+
+```json
+{
+	"title": "Quarto de despejo: Diário de uma favelada"
+}
+```
+
+### Exemplos de resposta
+
+```json
+{
+	"message": "Livro atualizado com sucesso!"
+}
+```
+
+```json
+{
+	"message": "Não autorizado"
+}
+```
+
+
+9. DELETE /user
+
+Essa rota é para excluir a conta do usuário logado.
+
+### Exemplo de requisição
+
+Sem corpo de requisição, apenas o token no headers.
+
+### Exemplo de resposta
+
+```json
+No body returned for response
+```
+
+```json
+{
+	"message": "Não autorizado"
+}
+```
+
+
+10. DELETE /book/:id 
+
+Essa rota é para deletar um livro específico. O ```id``` do livro que se quer deletar deve ser passado como parâmetro de rota ```req.params```.
+
+### Exemplos de requisição
+
+Sem corpo de requisição, apenas o token no headers.
+
+### Exemplos de resposta
+
+```json
+{
+	"message": "Livro excluído com sucesso."
+}
+```
+
+```json
+{
+	"message": "Não autorizado"
+}
+```
+
+10. GET /userbooks
+
+Essa rota lista todos os livros do usuáro logado.
+
+### Exemplos de requisição
+
+Sem corpo de requisição, apenas o token no headers.
+
+### Exemplos de resposta
+
 ```json
 [
-    {
-        "id": 1,
-        "name": "Pato Papão",
-        "email": "pato@email.com",
-        "age": 31,
-        "subscribers": 1200000,
-        "at_channel": "paptopapao_oficial",
-        "platform": "YouTube",
-        "id_user": 1,
-        "id_category": 13,
-        "category": "Games"
-    },
-    {
-        "id": 2,
-        "name": "Nyvi",
-        "email": "nyvi@st.com",
-        "age": 29,
-        "subscribers": 500000,
-        "at_channel": "nyvieoficial",
-        "platform": "YouTube",
-        "id_user": 1,
-        "id_category": 10,
-        "category": "Entretenimento"
+	{
+		"id": 1,
+		"title": "Um teto todo seu",
+		"author": "Virginia Woolf",
+		"available": true,
+		"gender": [
+			"Ensaio",
+			"ficção"
+		]
 	},
+	{
+		"id": 2,
+		"title": "Quarto de despejo: Diário de uma favelada",
+		"author": "Carolina Maria de Jesus",
+		"available": true,
+		"gender": [
+			"biografia",
+			"autobiografia"
+		]
+	},
+	{
+		"id": 4,
+		"title": "O estrangeiro",
+		"author": "Albert Camus",
+		"available": true,
+		"gender": [
+			"filosofia",
+			"ficção"
+		]
+	}
 ]
 ```
 
-7. GET /influencers/:id
-
-Essa Rota é para encontrar um influenciador pelo número do id. O ```id``` do influenciador que se quer encontrar deve ser passado como parâmetro de rota ```req.params```.
-
-### Exemplo de requisição
-
-Sem corpo de requisição, apenas o token no headers.
-
-### Exemplo de resposta
-
 ```json
 {
-    "Usuário não autorizado!"
-}
-```
-```json
-
-{
-    "id": 1,
-    "name": "Pato Papão",
-    "email": "pato@email.com",
-    "age": 31,
-    "subscribers": 1200000,
-    "at_channel": "paptopapao_oficial",
-    "platform": "YouTube",
-    "id_user": 1,
-    "id_category": 13,
-    "category": "Games"
-}
-
-```
-
-8. PUT /influencers/:id 
-
-Essa rota é para atualizar um influenciador. O ```id``` do influenciador que se quer atualizar deve ser passado como parâmetro de rota ```req.params```.
-
-### Exemplos de requisição
-
-```json
-{
-    "name": "Pato Papão",
-    "email":"patopa@email.com",
-    "age": 31,
-    "subscribers": 1200000,
-    "at_channel": "paptopapao_oficial2",
-    "platform": "YouTube",
-    "id_category": 13
-}
-```
-```json
-{
-    "name": "Peter L",
-    "subscribers": 1200000,
-    "at_channel": "@nerdchannel",
-    "platform": "YouTube",
-    "id_category": 10
-}
-```
-
-### Exemplos de resposta
-
-```json
-{
-    "Influencer não encontrado!"
-}
-```
-
-```json
-{
-    "Este e-mail já foi cadastrado."
-}
-```
-```json
-{
-    "O @ do canal já possui registro."
-}
-```
-```json
-{
-    "id": 5,
-    "name": "Pato Papão",
-    "email": "patopa@email.com",
-    "age": 31,
-    "subscribers": 1200000,
-    "at_channel": "paptopapao_oficial2",
-    "platform": "YouTube",
-    "id_user": 1,
-    "id_category": 13,
-    "category": "Games"
-}
-```
-
-9. DELETE /influencers/:id
-
-Essa rota é para excluir um influenciador. O ```id``` do influenciador que se quer excluir deve ser passado como parâmetro de rota ```req.params```.
-
-### Exemplo de requisição
-
-Sem corpo de requisição, apenas o token no headers.
-
-### Exemplo de resposta
-
-```json
-{
-    "Usuário não autorizado!"
-}
-```
-```json
-{
-    "Influencer não encontrado!"
-}
-```
-```json
-{
-    "Influenciador excluído com sucesso"
+	"message": "Não autorizado"
 }
 ```
 
