@@ -22,7 +22,6 @@ const patchUser = async (req, res) => {
 
         return res.status(200).json({ message: "Senha atualizada." });
     } catch (error) {
-        console.log(error)
         if (error.code === "P2025") {
             return res.status(404).json({ message: `Usuário não encontrado.` });
         }
