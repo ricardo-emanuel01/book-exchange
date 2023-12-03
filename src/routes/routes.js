@@ -29,6 +29,7 @@ const route = express();
 
 route.post('/signup', validateSchema(signUpSchema), signUp); //ok
 route.post("/signin", validateSchema(signInSchema), signIn); //ok
+route.get('/book', getBooks); // ok
 
 route.use(authentication); // ok
 
@@ -37,7 +38,6 @@ route.delete('/user', deleteUser); // ok
 route.put('/user', validateSchema(putUserSchema), putUser); // ok
 route.patch('/user/password', validateSchema(patchUserSchema), patchUser)
 
-route.get('/book', getBooks); // ok
 route.get('/userbooks', getUserBooks); // ok
 route.post('/book', validateSchema(postBookSchema), postBook); // ok
 route.get('/book/:id', getBook); // ok 
