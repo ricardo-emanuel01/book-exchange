@@ -54,3 +54,25 @@ ALTER TABLE "proposals" ADD CONSTRAINT "proposals_receiver_id_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "proposals" ADD CONSTRAINT "proposals_book_id_fkey" FOREIGN KEY ("book_id") REFERENCES "books"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- CreateTable
+CREATE TABLE "favorite_books" (
+    "user_id" INTEGER NOT NULL,
+    "book_id" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "genre" TEXT NOT NULL,
+
+    CONSTRAINT "favorite_books_user_id_fk"
+        FOREIGN KEY ("user_id")
+        REFERENCES "users" ("id")
+        ON DELETE CASCADE,
+
+    CONSTRAINT "favorite_books_book_id_fk"
+        FOREIGN KEY ("book_id")
+        REFERENCES "books" ("id")
+        ON DELETE CASCADE,
+
+    CONSTRAINT "favorite_books_pkey"
+        PRIMARY KEY ("user_id", "book_id")
+);
