@@ -21,6 +21,7 @@ model User {
   books Book[]
   sender Proposal[] @relation("sender_proposal")
   receiver Proposal[] @relation("receiver_proposal")
+  favorite_books FavoriteBook[]
   @@map("users")
 }
 
@@ -33,6 +34,7 @@ model Book {
   user User @relation(fields:[user_id], references:[id])
   user_id Int
   proposals Proposal[]
+  favorite_books FavoriteBook[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@map("books")
@@ -51,3 +53,18 @@ model Proposal {
   updatedAt DateTime @updatedAt
   @@map("proposals") 
 } 
+
+model FavoriteBook {
+  id Int @id @default(autoincrement())
+  user User @relation(fields:[user_id], references:[id])
+  user_id Int
+  book Book @relation(fields:[book_id], references:[id])
+  book_id Int
+  favorite Boolean @default(true)
+  title String
+  author String
+  gender String[] 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("favorite_books")
+}

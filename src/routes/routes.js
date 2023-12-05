@@ -41,7 +41,7 @@ route.patch('/user/password', validateSchema(patchUserSchema), patchUser)
 route.get('/userbooks', getUserBooks); // ok
 route.post('/book', validateSchema(postBookSchema), postBook); // ok
 route.get('/book/:id', getBook); // ok 
-route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok // msg Token inválido
+route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok 
 route.delete('/book/:id', deleteBook);
 
 

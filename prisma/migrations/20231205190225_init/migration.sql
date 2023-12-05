@@ -40,6 +40,21 @@ CREATE TABLE "proposals" (
     CONSTRAINT "proposals_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "favorite_books" (
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "book_id" INTEGER NOT NULL,
+    "favorite" BOOLEAN NOT NULL DEFAULT true,
+    "title" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "gender" TEXT[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "favorite_books_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
@@ -54,3 +69,9 @@ ALTER TABLE "proposals" ADD CONSTRAINT "proposals_receiver_id_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "proposals" ADD CONSTRAINT "proposals_book_id_fkey" FOREIGN KEY ("book_id") REFERENCES "books"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "favorite_books" ADD CONSTRAINT "favorite_books_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "favorite_books" ADD CONSTRAINT "favorite_books_book_id_fkey" FOREIGN KEY ("book_id") REFERENCES "books"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

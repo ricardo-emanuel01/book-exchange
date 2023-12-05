@@ -1,33 +1,35 @@
-
 const { PrismaClient } = require('@prisma/client');
-
+const bcrypt = require('bcrypt')
 
 const prisma = new PrismaClient();
 
 async function main() {
+
+    const passUser1 = await bcrypt.hash("123456", 10)
 
     const user1 = await prisma.user.create({
         data: {
             name: 'João Silva',
             email: 'joao@example.com',
             phone: '12345678901',
-            password: 'senha123',
+            password: passUser1,
             city: 'São Paulo',
             state: 'SP',
         },
     });
+
+    const passUser2 = await bcrypt.hash("123456", 10)
 
     const user2 = await prisma.user.create({
         data: {
             name: 'Maria Souza',
             email: 'maria@example.com',
             phone: '98765432109',
-            password: 'outrasenha456',
+            password: passUser2,
             city: 'Rio de Janeiro',
             state: 'RJ',
         },
     });
-
 
     const book1 = await prisma.book.create({
         data: {
@@ -83,6 +85,17 @@ async function main() {
             message: 'Gostaria de saber mais sobre este livro.',
         },
     });
+
+    // Usuário 1 favoritando o livro cadastrado pelo Usuário 2
+    const favoriteBook = await prisma.favoriteBook.create({
+        data: {
+            user_id: 1,
+            book_id: 2,
+            title: 'Poesias Brasileiras',
+            author: 'Ana Clara',
+            gender: ['Poesia', 'Literatura Brasileira']
+        }
+    })
 
     console.log('Dados de seed criados com sucesso!');
 }
