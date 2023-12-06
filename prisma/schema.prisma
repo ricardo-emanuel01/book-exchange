@@ -16,6 +16,7 @@ model User {
   password String
   city String
   state String
+  active_user Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   books Book[]
