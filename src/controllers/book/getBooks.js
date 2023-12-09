@@ -20,6 +20,11 @@ const getBooks = async (req, res) => {
       }
     }
 
+    parameters.where = {
+      ...parameters.where,
+      available: true
+    };
+
     parameters.select = {
       id: true,
       title: true,
