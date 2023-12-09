@@ -6,7 +6,12 @@ async function signIn(req, res) {
   const { email, password } = req.body;
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+        active_user: true
+      }
+    });
 
     if (!user) {
       return res.status(400).json({ "message": "E-mail ou senha inválida" });
