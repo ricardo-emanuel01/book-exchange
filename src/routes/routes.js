@@ -25,6 +25,8 @@ const deleteBook = require('../controllers/book/deleteBook');
 const getBooks = require('../controllers/book/getBooks.js');
 const getUserBooks = require('../controllers/book/getUserBooks.js');
 
+const postFavoriteBooks = require('../controllers/favorite_books/postFavoriteBooks.js');
+
 const route = express();
 
 route.post('/signup', validateSchema(signUpSchema), signUp); //ok
@@ -43,6 +45,8 @@ route.post('/book', validateSchema(postBookSchema), postBook); // ok
 route.get('/book/:id', getBook); // ok 
 route.put('/book/:id', validateSchema(putBookSchema), putBook); // ok 
 route.delete('/book/:id', deleteBook);
+
+route.post('/favorite_books/:book_id', postFavoriteBooks);
 
 
 
