@@ -1,4 +1,3 @@
-const { number } = require('joi');
 const prisma = require('../../prisma/client');
 
 const deleteBook = async (req, res) => {
@@ -6,7 +5,7 @@ const deleteBook = async (req, res) => {
   try {
     const id = Number(req.params.id);
     const book = await prisma.book.findUnique({
-      where: { id },
+      where: { id, available: true }
     })
 
     if (!book) {
@@ -23,7 +22,6 @@ const deleteBook = async (req, res) => {
     res.status(500).json({ message: "Erro interno do servidor." });
   }
 }
-
 
 
 module.exports = deleteBook;
