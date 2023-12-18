@@ -5,16 +5,17 @@ const deleteUser = async (req, res) => {
 
     const userId = req.user.id;
 
-    await prisma.book.deleteMany({
+    await prisma.book.updateMany({
       where: {
         user_id: userId
-      }
+      },
+      data: { available: false }
     })
 
-    await prisma.user.delete({
+    await prisma.user.update({
       where: {
         id: userId
-      }
+      }, data: { active_user: false }
     })
 
     return res.status(204).send();
