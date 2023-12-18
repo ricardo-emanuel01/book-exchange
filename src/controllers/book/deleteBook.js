@@ -13,17 +13,14 @@ const deleteBook = async (req, res) => {
       return res.status(404).json({ message: "Livro não encontrado." })
     }
 
-    await prisma.book.delete({ where: { id: Number(id), user_id: req.user.id } });
-    return res.status(200).json({ message: `Livro excluído com sucesso.` });
+    await prisma.book.update({ where: { id }, data: { available: false } })
+
+    return res.status(200).json({ message: "Livro excluído com sucesso." })
+
 
   } catch (error) {
-    if (error.code === "P2025") {
-      return res.status(404).json({
-        message:
-          `Não é possível excluir. Livro não existe ou não pertence ao usuário logado.`
-      });
-    }
-    res.status(500).json({ message: error.message });
+
+    res.status(500).json({ message: "Erro interno do servidor." });
   }
 }
 
