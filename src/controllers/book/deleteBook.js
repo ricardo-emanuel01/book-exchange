@@ -1,12 +1,16 @@
+const { number } = require('joi');
 const prisma = require('../../prisma/client');
 
 const deleteBook = async (req, res) => {
 
   try {
-    const { id } = req.params;
+    const id = Number(req.params.id);
+    const book = await prisma.book.findUnique({
+      where: { id },
+    })
 
-    if (!id) {
-      return res.status(400).json({ message: `É necessário informar o id do livro a ser deletado.` });
+    if (!book) {
+      return res.status(404).json({ message: "Livro não encontrado." })
     }
 
     await prisma.book.delete({ where: { id: Number(id), user_id: req.user.id } });
