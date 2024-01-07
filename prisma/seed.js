@@ -55,37 +55,6 @@ async function main() {
     },
   });
 
-  // Cria algumas propostas 
-  const proposal1 = await prisma.proposal.create({
-    data: {
-      sender: {
-        connect: { id: user1.id },
-      },
-      receiver: {
-        connect: { id: user2.id },
-      },
-      book: {
-        connect: { id: book2.id },
-      },
-      message: 'Olá, estou interessado neste livro!',
-    },
-  });
-
-  const proposal2 = await prisma.proposal.create({
-    data: {
-      sender: {
-        connect: { id: user2.id },
-      },
-      receiver: {
-        connect: { id: user1.id },
-      },
-      book: {
-        connect: { id: book1.id },
-      },
-      message: 'Gostaria de saber mais sobre este livro.',
-    },
-  });
-
   // Usuário 1 favoritando o livro cadastrado pelo Usuário 2
   const favoriteBook = await prisma.favoriteBook.create({
     data: {
